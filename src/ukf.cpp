@@ -435,15 +435,3 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     NIS_radar_ = z.transpose() * S.inverse() * z;
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
