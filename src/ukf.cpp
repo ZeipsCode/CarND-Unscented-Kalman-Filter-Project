@@ -60,7 +60,7 @@ UKF::UKF() {
   // State dimension
   n_x_ = x_.size();
   // Augmented state dimension
-  n_aug_ = n_x_ + 2; // We will create 2 * n_aug_ + 1 sigma points 
+  n_aug_ = n_x_ + 2; 
   // Number of sigma points
   n_sig_ = 2 * n_aug_ + 1;
   // Set the predicted sigma points matrix dimentions
