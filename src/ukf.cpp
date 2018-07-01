@@ -140,8 +140,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
     time_us_ = meas_package.timestamp_;
     // Done initializing, no need to predict or update
     is_initialized_ = true;
-    //cout << "Init" << endl;
-    //cout << "x_" << x_ << endl;
     return;
   }
 
