@@ -60,7 +60,7 @@ UKF::UKF() {
   // State dimension
   n_x_ = x_.size();
   // Augmented state dimension
-  n_aug_ = n_x_ + 2; // We will create 2 * n_aug_ + 1 sigma points 
+  n_aug_ = n_x_ + 2; 
   // Number of sigma points
   n_sig_ = 2 * n_aug_ + 1;
   // Set the predicted sigma points matrix dimentions
@@ -140,8 +140,6 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
     time_us_ = meas_package.timestamp_;
     // Done initializing, no need to predict or update
     is_initialized_ = true;
-    //cout << "Init" << endl;
-    //cout << "x_" << x_ << endl;
     return;
   }
 
@@ -437,15 +435,3 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     NIS_radar_ = z.transpose() * S.inverse() * z;
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
