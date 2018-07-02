@@ -119,6 +119,9 @@ public:
    */
   void UpdateRadar(MeasurementPackage meas_package);
 
+  void InitValues(MeasurementPackage meas_package);
+
+
 };
 
 #endif /* UKF_H */

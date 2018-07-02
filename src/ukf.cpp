@@ -28,7 +28,7 @@ UKF::UKF() {
   std_a_ = 2.6;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 3.0;
+  std_yawdd_ = 2.5;
   
   //DO NOT MODIFY measurement noise values below these are provided by the sensor manufacturer.
   // Laser measurement noise standard deviation position1 in m
@@ -60,7 +60,7 @@ UKF::UKF() {
   // State dimension
   n_x_ = x_.size();
   // Augmented state dimension
-  n_aug_ = n_x_ + 2; 
+  n_aug_ = n_x_ + 2; // We will create 2 * n_aug_ + 1 sigma points 
   // Number of sigma points
   n_sig_ = 2 * n_aug_ + 1;
   // Set the predicted sigma points matrix dimentions
@@ -87,17 +87,10 @@ UKF::~UKF() {}
  * @param {MeasurementPackage} meas_package The latest measurement data of
  * either radar or laser.
  */
-void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
-  /**
-  TODO:
 
-  Complete this function! Make sure you switch between lidar and radar
-  measurements.
-  */
+void UKF::InitValues(MeasurementPackage meas_package) {
 
-  if (!is_initialized_)
-  {
-    // Initial covariance matrix
+   // Initial covariance matrix
       P_ << 1, 0, 0, 0, 0,
             0, 1, 0, 0, 0,
             0, 0, 1, 0, 0,
@@ -140,7 +133,23 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
     time_us_ = meas_package.timestamp_;
     // Done initializing, no need to predict or update
     is_initialized_ = true;
+    //cout << "Init" << endl;
+    //cout << "x_" << x_ << endl;
     return;
+
+}
+
+void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
+  /**
+  TODO:
+
+  Complete this function! Make sure you switch between lidar and radar
+  measurements.
+  */
+
+  if (!is_initialized_)
+  {
+   InitValues(meas_package);
   }
 
   // Calculate the timestep between measurements in seconds
@@ -435,3 +444,15 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     NIS_radar_ = z.transpose() * S.inverse() * z;
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
